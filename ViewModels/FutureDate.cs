@@ -1,22 +1,22 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Globalization;
-    using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Linq;
 using System.Web;
-    using Microsoft.Owin.Security.Provider;
+using Microsoft.Owin.Security.Provider;
 
-    namespace BigSchoolProject.ViewModels
+namespace BigSchoolProject.ViewModels
+{
+    public class FutureDate : ValidationAttribute
     {
-        public class FutureDate : ValidationAttribute
+        public override bool IsValid(object value)
         {
-            public override bool IsValid(object value)
-            {
-                DateTime dateTime;
-                var isValid = DateTime.TryParseExact(Convert.ToString(value), "dd/MM/yyyy",
-                    CultureInfo.CurrentCulture,
-                    DateTimeStyles.None, out dateTime);
-                return (isValid && dateTime > DateTime.Now);
-            }
+            DateTime dateTime;
+            var isValid = DateTime.TryParseExact(Convert.ToString(value), "dd/MM/yyyy",
+                CultureInfo.CurrentCulture,
+                DateTimeStyles.None, out dateTime);
+            return (isValid && dateTime > DateTime.Now);
         }
     }
+}
